@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My first Vue app</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+
+<body>
+    <div class="nav-bar"></div>
+    <div id="divProduct">
+        <div class="product">
+            <div class="product-image">
+                <img :src="image" :alt="imageDescription">
+            </div>
+            <div class="product-info">
+                <h1>{{ product }}</h1>
+                <p>{{ description }}</p>
+                <p v-if="inventory > 10">In stock</p>
+                <p v-else-if="inventory <= 10 && inventory > 0">Hurry up only {{ inventory }} left</p>
+                <p v-else style="text-decoration: line-through">Out of stock</p>
+                <ul>
+                    <li v-for="d in details">{{ d }}</li>
+                </ul>
+                <h2>Sizes</h2>
+                <ul>
+                    <li v-for="s in sizes">{{ s }}</li>
+                </ul>
+                <h2>Available colors</h2>
+                <div class="color-box" v-for="(c,index) in colors" @mouseover="changeImage(index)"
+                    :style="{ backgroundColor: c.name }"></div>
+
+                <button @click="addToCart" :disabled="!inventory" :class="{ disabledButton:!inventory }">Add to
+                    cart</button>
+                <div class="cart">
+                    <p>Cart {{ cart }}</p>
+                </div>
+                <button @click="removeFromCart">Remove from cart</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
