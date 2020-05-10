@@ -8,7 +8,18 @@
 </head>
 
 <body>
+    <nav>
+        <div class="nav-wrapper">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Sign up</a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="container" id="container">
+        <div class="logo">
+            <img src="img/logo.png" alt="logo" title="logo" class="responsive-img">
+        </div>
         <tool-list-component v-on:showtoolinformation="showtoolinformation" ref="toollistcomponent">
         </tool-list-component>
 
@@ -16,21 +27,21 @@
             v-on:showuserinfo="showuserinfo">
         </tool-description-component>
 
-        <user-information-template ref="userinfocomponent" v-on:showtoollist="showtoollist"></user-information-template>
+        <user-information-template ref="userinfocomponent" v-on:showtoolinformation="showtoolinformation">
+        </user-information-template>
     </div>
 
     <script type="text/x-template" id="tool-list-template">
-        <div id="tools" v-bind:class="{ hidden: shouldHide }">
-            <h1>
-                <i class="medium material-icons">build</i> Tools you might like
-            </h1>
-            <div v-for="tool in listTools" class="row">
-                <div class="col s4"><img src="img/hammer.jpg" alt="tool"
-                        style="border: 2px solid #004d40; width: 100%;"></div>
-                <div class="col s8">
-                    <h2>{{ tool.name }}</h2>
-                    <p>Model : {{ tool.model }} - Serial Number : {{ tool.serial_number }}</p>
-                    <button v-on:click="showTool(tool.id)">See this tool in detail</button>
+        <div id="tools" v-bind:class="{ hidden: shouldHide }" class="row">
+            <div v-for="tool in listTools" class="col s12 m4 l6">
+                <div class="bordered-card">
+                    <div class="col s4"><img src="img/hammer.jpg" alt="tool" class="responsive-img"></div>
+                    <div class="col s8">
+                        <h2>{{ tool.name }}</h2>
+                        <p>Model : {{ tool.model }}</p> 
+                        <p>Serial Number : {{ tool.serial_number }}</p>
+                        <button v-on:click="showTool(tool.id)">See this tool in detail</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -40,9 +51,9 @@
     <script type="text/x-template" id="tool-description-template">
         <div id="tool" v-bind:class="{ hidden: hide }" v-if="tool">
             <h1>{{ tool.name }}</h1>
+            <button v-on:click="back">Back to the list</button>
             <div class="row">
-                <button v-on:click="back">Back to the list</button>
-                <div class="col s9">
+                <div class="col s12 m9">
                     <h2>Tool information</h2>
                     <p><strong>Model:</strong> {{ tool.model }}</p>
                     <p><strong>Serial number:</strong> {{ tool.serial_number }}</p>
@@ -53,8 +64,9 @@
                         <p v-if="!comments.length">No comment for this tool, be the first!</p>
                     </div>
                 </div>
-                <div class="col s3">
+                <div class="col s12 m3 bordered-card" style="text-align: center; height: 410px">
                     <h2>Owner</h2>
+                    <p style="color:#253c78"><i class="large material-icons">face</i></p>
                     <p>{{ owner }}</p>
                     <button v-on:click="showOwner(ownerid)">See this user in detail</button>
                 </div>

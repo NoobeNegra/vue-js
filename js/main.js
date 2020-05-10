@@ -19,7 +19,7 @@ Vue.component('toolDescriptionComponent', {
         },
         showOwner: function (ownerId) {
             this.hide = true;
-            this.$emit('showuserinfo', ownerId);
+            this.$emit('showuserinfo', ownerId, this.tool.id);
         }
     },
     computed: {
@@ -91,8 +91,8 @@ new Vue({
         showtoollist: function () {
             this.$refs.toollistcomponent.show();
         },
-        showuserinfo: function (ownerId) {
-            this.$refs.userinfocomponent.showInfo(ownerId);
+        showuserinfo: function (ownerId, toolId) {
+            this.$refs.userinfocomponent.showInfo(ownerId, toolId);
         }
     },
 });
